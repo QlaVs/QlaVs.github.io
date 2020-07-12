@@ -34,9 +34,8 @@
 		});
 		send('users.get',{}, function (data) {
 			//render
-			render(data.response);
 			const btn = '<button type="button" onclick="localStorage.clear(); location.reload();">Выйти</button>';
-			$('#username').html('Имя: ' + data.response[0].first_name + btn).show();
+			$('ul').html('Имя: ' + data.response[0].first_name + btn).show();
 		});
     }
 
