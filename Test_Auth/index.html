@@ -49,19 +49,17 @@
 		return "https://api.vk.com/method/" + method + '?' + $.param(params);
     }
 
-	function send(method, params, callback) {
+	function send(method, params, func) {
 		$.ajax({
 			url: URL(method, params),
 			method: "GET",
 			dataType: "JSONP",
-			success: callback
+			success: console.log(data);
 		});
     }
 
     function render(response) {
         var html = '';
-		temp = response;
-		console.log(temp);
         for(var i = 1; i < response.length; i++){
             var f = response[i];
             html += '<li>' +
