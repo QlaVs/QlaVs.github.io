@@ -46,6 +46,7 @@
 	    if (!method) throw new Error('Method not found');
 	    params = params || {};
 	    params['access_token'] = localStorage.token;
+		params['v'] = '5.52';
 		return "https://api.vk.com/method/" + method + '?' + $.param(params);
     }
 
