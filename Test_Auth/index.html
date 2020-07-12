@@ -9,14 +9,11 @@
 </head>
 <body>
 <h2>Получение списка друзей и имени</h2>
-https://oauth.vk.com/authorize?client_id=7534918&display=page&scope=friends&response_type=token&v=5.52
-https://oauth.vk.com/blank.html#access_token=61a082cc603e1e7b03151e6992f40e9b28ca27c34e26a069ac7ea57df43a212327681e1ff0e11974215c1&expires_in=86400&user_id=21309667
-
 
 <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
 <h2>
 <div class="text-center">
-	<a role="button" href="https://oauth.vk.com/authorize?client_id=7534918&redirect_uri=QlaVs.github.io/&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
+	<a role="button" href="https://oauth.vk.com/authorize?client_id=7534918&redirect_uri=QlaVs.github.io/Test_Auth&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
 </div>
 </h2>
 
@@ -30,11 +27,12 @@ https://oauth.vk.com/blank.html#access_token=61a082cc603e1e7b03151e6992f40e9b28c
 
     if(Date.now() <= parseInt(localStorage.session)){
        $("#btn").hide();
-       send('friends.search',{count:5, fields:'photo_200'}, function (data) {
+       send('friends.search',{count:5}, function (data) {
             render(data.response);
         });
         send('users.get',{}, function (data) {
             //render
+			render(data.response);
 	        const btn = '<button type="button" onclick="localStorage.clear(); location.reload();" class="btn btn-dark">Выйти</button>';
             $('#username').html('Имя: '+data.response[0].first_name + btn).show();
         });
@@ -64,7 +62,6 @@ https://oauth.vk.com/blank.html#access_token=61a082cc603e1e7b03151e6992f40e9b28c
         for(let i=1; i<response.length;i++){
             let f = response[i];
             html += "<div class=\"card col-sm\">" +
-                "<img class=\"card-img-top\" src=\""+f.photo_200+"\">" +
                 "<div class=\"card-body\">" +
                 "<h5 class=\"card-text\">"+f.first_name+' '+f.last_name+"</h5>" +
                 "</div>" +
