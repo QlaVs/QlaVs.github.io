@@ -13,10 +13,12 @@
 <script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
 <h2>
 <div class="text-center">
-	<a role="button" href="https://oauth.vk.com/authorize?client_id=7534918&redirect_uri=QlaVs.github.io/Test_Auth&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
+	<a role="button" href="https://oauth.vk.com/authorize?client_id=7534918&redirect_uri=QlaVs.github.io/Test_Auth&scope=friends&response_type=token&v=5.52" id="btn">Авторизоваться</a>
 </div>
 </h2>
+
 <ul></ul>
+
 <script>
 	
     if(location.hash.indexOf("#access_token=")===0){
@@ -26,22 +28,22 @@
     }
 
     if(Date.now() <= parseInt(localStorage.session)){
-       $("#btn").hide();
-       send('friends.search',{count:5}, function (data) {
-            render(data.response);
-        });
-        send('users.get',{}, function (data) {
-            //render
+		$("#btn").hide();
+		send('friends.search',{count:5}, function (data) {
 			render(data.response);
-	        const btn = '<button type="button" onclick="localStorage.clear(); location.reload();" class="btn btn-dark">Выйти</button>';
-            $('#username').html('Имя: '+data.response[0].first_name + btn).show();
-        });
+		});
+		send('users.get',{}, function (data) {
+			//render
+			render(data.response);
+			const btn = '<button type="button" onclick="localStorage.clear(); location.reload();">Выйти</button>';
+			$('#username').html('Имя: ' + data.response[0].first_name + btn).show();
+		});
     }
 
     /**
      * @return {string}
      */
-    function URL  (method, params) {
+    function URL (method, params) {
 	    if (!method) throw new Error('Method not found');
 	    params = params || {};
 	    params['access_token'] = localStorage.token;
@@ -59,7 +61,7 @@
 
     function render(response) {
         var html = '';
-        for(var i=1; i<response.length;i++){
+        for(var i = 1; i < response.length; i++){
             var f = response[i];
             html += '<li>' +
 					'<a target="_blank" href="vk.com/id"' + f.uid + '>'+
@@ -69,6 +71,7 @@
 					'</a>'+
 					'</li>';
         }
+		console.log(html);
         $('ul').html(html);
     }
 </script>
