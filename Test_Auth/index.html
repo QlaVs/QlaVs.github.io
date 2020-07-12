@@ -16,7 +16,7 @@
 	<a role="button" href="https://oauth.vk.com/authorize?client_id=7534918&redirect_uri=QlaVs.github.io/Test_Auth&scope=friends&response_type=token&v=5.52" class="btn col-sm-4 btn-outline-primary btn-lg" id="btn">Авторизоваться</a>
 </div>
 </h2>
-
+<ul></ul>
 <script>
 	
     if(location.hash.indexOf("#access_token=")===0){
@@ -58,17 +58,18 @@
     }
 
     function render(response) {
-        let html = '';
-        for(let i=1; i<response.length;i++){
-            let f = response[i];
-            html += "<div class=\"card col-sm\">" +
-                "<div class=\"card-body\">" +
-                "<h5 class=\"card-text\">"+f.first_name+' '+f.last_name+"</h5>" +
-                "</div>" +
-                "</div>";
+        var html = '';
+        for(var i=1; i<response.length;i++){
+            var f = response[i];
+            html += '<li>' +
+					'<a target="_blank" href="vk.com/id"' + f.uid + '>'+
+						'<div>'+
+							'<h4>' + f.first_name + ' ' + f.last_name + '</h4>'+
+						'</div>'+
+					'</a>'+
+					'</li>';
         }
-        //console.log(html);
-        $("#friends").html(html);
+        $('ul').html(html);
     }
 </script>
 </body>
