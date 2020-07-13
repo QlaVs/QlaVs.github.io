@@ -55,7 +55,9 @@
 			url: URL(method, params),
 			method: "GET",
 			dataType: "JSONP",
-			success: console.log(data)
+			success: function(data){
+				console.log(data);
+			}
 		});
     }
 
