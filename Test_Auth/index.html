@@ -30,7 +30,7 @@
     if(Date.now() <= parseInt(localStorage.session)){
 		$("#btn").hide();
 		send('friends.search',{count:5}, function (data) {
-			render(data);
+			render(data.response.items);
 		});
 		send('users.get',{}, function (data) {
 			//render
