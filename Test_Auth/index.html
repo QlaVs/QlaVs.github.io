@@ -35,7 +35,7 @@
 			const btn = '<button type="button" onclick="localStorage.clear(); location.reload();">Выйти</button>';
 			$('h3').html('Имя пользователя: ' + data.response[0].first_name + ' ' + btn).show();
 		});
-		send('friends.search',{count:5}, function (data) {
+		send('friends.search',{count:5, fields:'photo_200'}, function (data) {
 			render(data.response.items);
 		});
 		
