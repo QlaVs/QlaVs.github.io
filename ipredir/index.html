@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv='refresh' content='0; URL=https://ipqualityscore.com/api/json/ip/iWY48acUFG4aIun9wpZkIv8WpEeTycbp/91.204.150.16'>
-</head>
 <body>
-
-<h1>Simple Page</h1>
-<p>My first paragraph.</p>
-
+<script>
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var c = url.searchParams.get("addr");
+    var final = 'https://ipqualityscore.com/api/json/ip/iWY48acUFG4aIun9wpZkIv8WpEeTycbp/';
+    final = final.concat(c);
+    window.location.replace(final);
+    // document.write(final);
+</script>
 </body>
 </html> 
