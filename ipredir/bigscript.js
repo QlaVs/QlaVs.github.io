@@ -4,16 +4,18 @@ var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 	var x = new XMLHttpRequest();
 	x.open(options.method, cors_api_url + options.url);
 	x.onload = x.onerror = function() {
-		document.write(x.response);
+		var result = JSON.parse(x.response);
+		//console.log(result);
+		//alert(JSON.stringify(x.response));
 		//data = JSON.stringify(x.responseText, undefined, 2);
-		//document.getElementById("json").textContent = data;
+		document.getElementById("json").textContent = x.response;
 	};
 
 	if (/^POST/i.test(options.method)) {
 		x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	}
 
-	x.send(options.data);
+	x.send();
   }
 
 (function() {
