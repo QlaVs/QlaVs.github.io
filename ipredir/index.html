@@ -2,13 +2,61 @@
 <html>
 <body>
 <script>
-    var url_string = window.location.href;
-    var url = new URL(url_string);
-    var c = url.searchParams.get("addr");
-    var final = 'https://ipqualityscore.com/api/json/ip/iWY48acUFG4aIun9wpZkIv8WpEeTycbp/';
-    final = final.concat(c);
-    window.location.replace(final);
-    // document.write(final);
+
+
+    //const response = fetch(final);
+    //const myJson = response.json();
+    //window.location.replace(final);
+
+//
+
+  var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+
+  function doCORSRequest(options, printResult) {
+	var x = new XMLHttpRequest();
+	x.open(options.method, cors_api_url + options.url);
+	x.onload = x.onerror = function() {
+		printResult(options.method + ' ' + options.url + '\n' + x.status + ' ' + x.statusText + '\n\n' +
+		(x.responseText || ''));
+	};
+
+	if (/^POST/i.test(options.method)) {
+		x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	}
+
+	x.send(options.data);
+  }
+
+  // Bind event
+(function() {
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var c = url.searchParams.get("addr");
+	var final = 'https://ipqualityscore.com/api/json/ip/iWY48acUFG4aIun9wpZkIv8WpEeTycbp/';
+    
+	final = final.concat(c);
+	var urlField = final;
+	(function() {
+		doCORSRequest({ method: this.id === 'post' ? 'POST' : 'GET', url: urlField},
+		function printResult(result) { consol.log(result); });
+	})();
+})();
+
+    //async function get() {
+    //let url_final = 'https://ipqualityscore.com/api/json/ip/iWY48acUFG4aIun9wpZkIv8WpEeTycbp/';
+
+    //var url_string = window.location.href;
+    //var url = new URL(url_string);
+    //var c = url.searchParams.get("addr");
+	
+    //url_final = url_final.concat(c);
+    //let obj = await (await fetch(url_final)).json();
+    
+    //console.log(obj);
+    //return obj;
+    //}
 </script>
+
+
 </body>
 </html> 
